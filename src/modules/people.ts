@@ -114,4 +114,4 @@ peopleComposer.command(["ots people( (--kick|-k) (longTimeAgo|restricted|bot|del
       return ctx.telegram.editMessage(ctx.chat.id,msg.message.id,`${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`,{parseMode:"markdown"})
     }
   }
-})
+}) 
