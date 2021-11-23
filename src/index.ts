@@ -28,4 +28,7 @@ async function loadPlugins(){
   }
 }
 loadPlugins()
+bot.catch(error => {
+  console.log(error.message)
+})
 bot.run()
