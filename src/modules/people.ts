@@ -26,13 +26,8 @@ peopleComposer.command(["ots people(\s(--kick|-k)\s(longTimeAgo|restricted|bot|d
     let count = await ctx.telegram.getChatMembersCount(ctx.chat.id) 
     let u = await ctx.telegram.getChatMember(ctx.chat.id,ctx.from.id) 
     let allowed = ["admin","creator"]
-    if(!allowed.includes(u.status)){
+    if(spl.length > 3 && !allowed.includes(u.status)){
       let text = `Error: \`Admin required.\``
-      return ctx.replyWithMarkdown(`${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`)
-    }
-    //@ts-ignore
-    if(spl.length >3 && !u.adminRights?.banUser){
-      let text = `Error: \`Admin right with permission to banUsers is required.\``
       return ctx.replyWithMarkdown(`${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`)
     }
     if(count == undefined){
