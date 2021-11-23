@@ -12,10 +12,10 @@ export const modules = ["people"]
 peopleComposer.prefix = "d"  
 peopleComposer.command(["ots (--help|-h) people","ots people (--help|-h)"],(ctx)=>{
   let now = getPing(ctx)
-  let text = `**People**\nChecking the members status of groups/channel.\n**Usage : **\`dots people [options]\`\n**Options :**\n\`[--kick | -k] [longTimeAgo|restricted|bot|deleteAccount] - checking members with kicking specific filters\``
+  let text = `**People**\nChecking the members status of groups/channel.\n**Usage : **\`dots people [options]\`\n**Options :**\n\`[--kick | -k] [longTimeAgo|restricted|bot|deletedAccount] - checking members with kicking specific filters\``
   return ctx.replyWithMarkdown(`${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`)
 })
-peopleComposer.command(["ots people(\s(--kick|-k)\s(longTimeAgo|restricted|bot|deleteAccount))?"],async (ctx)=>{
+peopleComposer.command(["ots people( (--kick|-k) (longTimeAgo|restricted|bot|deletedAccount))?"],async (ctx)=>{
   let now = await getPing(ctx) 
   if(ctx.chat.private){
     let text = `Error: \`This command is only available on supergroup or channel.\``
@@ -25,10 +25,17 @@ peopleComposer.command(["ots people(\s(--kick|-k)\s(longTimeAgo|restricted|bot|d
     let spl = ctx.text.split(" ") 
     let count = await ctx.telegram.getChatMembersCount(ctx.chat.id) 
     let u = await ctx.telegram.getChatMember(ctx.chat.id,ctx.from.id) 
-    let allowed = ["admin","creator"]
-    if(spl.length > 3 && !allowed.includes(u.status)){
-      let text = `Error: \`Admin required.\``
-      return ctx.replyWithMarkdown(`${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`)
+    let allowed = ["admin","creator"] 
+    if(spl.length >= 3){
+      if(!allowed.includes(u.status)){
+        let text = `Error: \`Admin required.\``
+        return ctx.replyWithMarkdown(`${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`)
+      } 
+      //@ts-ignore
+      if(!u.adminRights?.banUsers){
+        let text = `Error: \`AdminRight with permission to banUsers is required.\``
+        return ctx.replyWithMarkdown(`${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`)
+      }
     }
     if(count == undefined){
       let text = `Error: \`Can't getting the members count. Try again laters.\``
@@ -58,7 +65,7 @@ peopleComposer.command(["ots people(\s(--kick|-k)\s(longTimeAgo|restricted|bot|d
           let {user} = k
           if(user.deleted){
             deleted ++ 
-            if(spl.length == 4 && spl[3] == "deleteAccount"){
+            if(spl.length == 4 && spl[3] == "deletedAccount"){
               setTimeout(async ()=>{
                 try{
                   await ctx.telegram.editBanned(ctx.chat.id,user.id)
@@ -72,7 +79,7 @@ peopleComposer.command(["ots people(\s(--kick|-k)\s(longTimeAgo|restricted|bot|d
             bot ++ 
             if(spl.length == 4 && spl[3] == "bot"){
               setTimeout(async ()=>{
-                try{
+                try{ 
                   await ctx.telegram.editBanned(ctx.chat.id,user.id)
                 }catch(error){
                   failed ++
@@ -84,7 +91,7 @@ peopleComposer.command(["ots people(\s(--kick|-k)\s(longTimeAgo|restricted|bot|d
             restricted ++ 
             if(spl.length == 4 && spl[3] == "restricted"){
               setTimeout(async ()=>{
-                try{
+                try{ 
                   await ctx.telegram.editBanned(ctx.chat.id,user.id)
                 }catch(error){
                   failed ++
@@ -100,7 +107,7 @@ peopleComposer.command(["ots people(\s(--kick|-k)\s(longTimeAgo|restricted|bot|d
               longTimeAgo ++
               if(spl.length == 4 && spl[3] == "longTimeAgo"){
                 setTimeout(async ()=>{
-                  try{
+                  try{ 
                     await ctx.telegram.editBanned(ctx.chat.id,user.id)
                   }catch(error){
                     failed ++
@@ -115,7 +122,7 @@ peopleComposer.command(["ots people(\s(--kick|-k)\s(longTimeAgo|restricted|bot|d
         } 
         total ++
       } 
-       text = `Kicked : **${Boolean(spl.length >=3)}**\nDeleted : **${deleted}**\nRestricted : ${restricted}\nRecently : **${recently}**\nBot : ${bot}\nLongTimeAgo : **${longTimeAgo}**\nTotal : **${total}**\nFailed to kick : **${failed}**`
+       text = `Kicked : **${Boolean(spl.length >=3)}**\nDeleted : **${deleted}**\nRestricted : **${restricted}**\nRecently : **${recently}**\nBot : **${bot}**\nLongTimeAgo : **${longTimeAgo}**\nTotal : **${total}**\nFailed to kick : **${failed}**`
       //@ts-ignore
       return ctx.telegram.editMessage(ctx.chat.id,msg.message.id,`${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`,{parseMode:"markdown"})
     }
