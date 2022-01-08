@@ -6,6 +6,6 @@ module.exports = {
   storeSession : true,
   apiId : Number(process.env.API_ID),
   apiHash : String(process.env.API_HASH),
-  logger: "info",
+  logger: "debug",
   useWSS : false
 };
