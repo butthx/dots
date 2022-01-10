@@ -16,7 +16,7 @@ startComposer.command('start', (ctx) => {
   let now = getPing(ctx);
   let text = `Hi [${
     ctx.from.lastName ? ctx.from.firstName + ' ' + ctx.from.lastName : ctx.from.firstName
-  }](tg://user?id=${ctx.from.id})\ntype \`dots \\--help\` to see the help.`;
+  }](tg://user?id=${ctx.from.id})\ntype \`/help\` to see the help.\n\n[Give stars in original repo!](https://github.com/butthx/dots)`;
   return ctx.replyWithMarkdown(
     `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`
   );
