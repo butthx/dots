@@ -1,0 +1,28 @@
+{
+  "name": "dots robot",
+  "description": "Deploy your clone!",
+  "website": "https://github.com/butthx/dots#readme",
+  "repository": "https://github.com/butthx/dots",
+  "env": {
+    "SESSION": {
+      "description": "tgsnake string session, get it from https://replit.com/@butthx/TgSnakeGenerateSessions don't forget to login as bot.",
+      "required" : true
+    },
+    "BOT_TOKEN": {
+      "description": "Your bot token, get it from botFather.",
+      "required" : true
+    },
+    "API_HASH": {
+      "description": "Your api hash, get it from my.telegram.org",
+      "required" : true
+    },
+    "API_ID": {
+      "description": "Your api id, get it from my.telegram.org",
+      "required" : true
+    },
+   "MONGODB_URI": {
+      "description": "Your mongodbURI.",
+      "required" : true
+    }
+  }
+}

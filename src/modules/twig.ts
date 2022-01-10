@@ -453,7 +453,7 @@ twigComposer.use(async (ctx, next) => {
 });
 twigComposer.hears([/^dots twig (\-\-help|\-h)$/, /^dots (\-\-help|\-h) twig$/], async (ctx) => {
   let now = await getPing(ctx);
-  let text = `🌱 **Twig**\nUsing twig template to manage group.\n**Usage : **\`dots twig [options]\`\n**Options :**\n\`[--set | -s] - setup twig templates\`\n\`[--remove | -r] - remove twig templates\`\n**TypeUpdates :** All TypeUpdates should be same with [tgsnake](https://tgsnake.js.org/getting-started/update#using-on)\n\n**Example Template :**\n\`\`\`{% if on("message") %}\n  {{ telegram.reply("Hi, this is twig 🌱") }}\n{% endif %}\`\`\`\n\n**Notes** : **Dont delete your message before the process is complete.**`;
+  let text = `🌱 **Twig**\nUsing twig template to manage group.\n**Usage : **\`dots twig [options]\`\n**Options :**\n\`[\\--set | -s] - setup twig templates\`\n\`[\\--remove | -r] - remove twig templates\`\n**TypeUpdates :** All TypeUpdates should be same with [tgsnake](https://tgsnake.js.org/getting-started/update#using-on)\n\n**Example Template :**\n\`\`\`{% if on("message") %}\n  {{ telegram.reply("Hi, this is twig 🌱") }}\n{% endif %}\`\`\`\n\n**Notes** : **Dont delete your message before the process is complete.**`;
   return ctx.replyWithMarkdown(
     `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`,
     {

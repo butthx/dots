@@ -14,16 +14,16 @@ const Api = GramJs.Api;
 export const peopleComposer = new Composer();
 export const modules = ['people'];
 peopleComposer.hears(
-  [new RegExp('dots (--help|-h) people'), new RegExp('dots people (--help|-h)')],
+  [new RegExp('dots (help|-h) people'), new RegExp('dots people (help|-h)')],
   (ctx) => {
     let now = getPing(ctx);
-    let text = `👨🏻‍💻 **People**\nChecking the members status of groups/channel.\n**Usage : **\`dots people [options]\`\n**Options :**\n\`[--kick | -k] [longTimeAgo|restricted|bot|deletedAccount] - checking members with kicking specific filters\`\n**Notes**:\n• **You can only fetch new data once every 30 minutes.**\n• **Don't delete your message before process completed.**`;
+    let text = `👨🏻‍💻 **People**\nChecking the members status of groups/channel.\n**Usage : **\`dots people [options]\`\n**Options :**\n\`[\\--kick | -k] [longTimeAgo|restricted|bot|deletedAccount] - checking members with kicking specific filters\`\n**Notes**:\n• **You can only fetch new data once every 30 minutes.**\n• **Don't delete your message before process completed.**`;
     return ctx.replyWithMarkdown(
       `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`
     );
   }
 );
-peopleComposer.command([new RegExp('dots people( (--kick|-k))?')], async (ctx) => {
+peopleComposer.command([new RegExp('dots people( (kick|-k))?')], async (ctx) => {
   let now = await getPing(ctx);
   if (ctx.chat.private) {
     let text = `👨🏻‍💻 This command only work in **group/supergroup**`;
@@ -161,6 +161,18 @@ async function getPeople(ctx: MessageContext, args: Array<string> = []) {
       people_verified = file.people_verified;
       people_restricted = file.people_restricted;
       people_admin = file.people_admin;
+    }else {
+      if (loop > 1) {
+        let offset = 0;
+        for (let i = 0; i < loop; i++) {
+          if (i > 0) {
+            offset = offset + 200;
+          }
+          await run(offset);
+        }
+      } else {
+        await run(0);
+      }
     }
   } else {
     if (loop > 1) {
