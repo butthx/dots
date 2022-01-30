@@ -40,13 +40,15 @@ helpComposer.command(['help'], (ctx) => {
     ctx.SnakeClient.aboutMe.lastName
       ? ctx.SnakeClient.aboutMe.firstName + ' ' + ctx.SnakeClient.aboutMe.lastName
       : ctx.SnakeClient.aboutMe.firstName
-  } v1.0.0**\n[tgsnake](https://tgsnake.js.org) v${
+  } v1.2.2**\n[tgsnake](https://tgsnake.js.org) v${
     ctx.SnakeClient.version
   }\n\nhelper format : \`/help[command name]\`\nExample : \`/helpStart\`\n**Available Command**\n${moduleList
     .sort((a, b) => a.localeCompare(b))
     .join(' | ')}`;
   return ctx.replyWithMarkdown(
-    `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`
+    `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`,{
+      noWebpage : true
+    }
   );
 });
 helpComposer.command(['helpStart'], (ctx) => {

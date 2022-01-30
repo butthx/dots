@@ -19,7 +19,7 @@
     "dotenv": "^10.0.0",
     "mongoose": "^6.1.4",
     "prettier": "^2.5.1",
-    "tgsnake": "^2.0.0-alpha.6",
+    "tgsnake": "^2.0.0-beta.11",
     "twig": "^1.15.4"
   }
 }

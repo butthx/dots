@@ -26,10 +26,10 @@
   dependencies:
     "@cspotcode/source-map-consumer" "0.8.0"
 
-"@tgsnake/parser@^1.0.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@tgsnake/parser/-/parser-1.1.0.tgz#a7fe8cc966a944e5925b4be65b17746d4fd8063a"
-  integrity sha512-kL0PszEr6aOY1B4W2Y1SsV7ef0qXJoQj4USwfuyPOaBUSm3JwLAkdqyoAxwC1CAC1AbfWolCU/jH5WlgxS4+aQ==
+"@tgsnake/parser@1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@tgsnake/parser/-/parser-1.1.1.tgz#897112264e14a02ef1a9bb6781499159d3850575"
+  integrity sha512-twXn7QxglnAMJWq+4/2wMFf2UpcaV/zNF7Qiumc93jinbe9U9QsoYYgww2YlHc0C+B3njcEpnbYE//gQUzsUBA==
   dependencies:
     big-integer "^1.6.51"
     htmlparser2 "^7.2.0"
@@ -127,12 +127,12 @@ available-typed-arrays@^1.0.5:
   resolved "https://registry.yarnpkg.com/available-typed-arrays/-/available-typed-arrays-1.0.5.tgz#92f95616501069d07d10edb2fc37d3e1c65123b7"
   integrity sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==
 
-axios@0.24.0:
-  version "0.24.0"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.24.0.tgz#804e6fa1e4b9c5288501dd9dff56a7a0940d20d6"
-  integrity sha512-Q6cWsys88HoPgAaFAVUb0WpPk0O8iTeisR9IMqy9G8AbO4NlpVknrnQS03zzF9PGAWgO3cgletO3VjV/P7VztA==
+axios@0.25.0:
+  version "0.25.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.25.0.tgz#349cfbb31331a9b4453190791760a8d35b093e0a"
+  integrity sha512-cD8FOb0tRH3uuEe6+evtAbgJtfxr7ly3fQjYcMcuPlgkwVS9xboaVIpcDV+cYQe+yGykgwZCs1pzjntcGa6l5g==
   dependencies:
-    follow-redirects "^1.14.4"
+    follow-redirects "^1.14.7"
 
 balanced-match@^1.0.0:
   version "1.0.2"
@@ -391,10 +391,10 @@ file-type@16.5.3:
     strtok3 "^6.2.4"
     token-types "^4.1.1"
 
-follow-redirects@^1.14.4:
-  version "1.14.6"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.6.tgz#8cfb281bbc035b3c067d6cd975b0f6ade6e855cd"
-  integrity sha512-fhUl5EwSJbbl8AR+uYL2KQDxLkdSjZGR36xy46AO7cOMTrCMON6Sa28FmAnC2tRTDbd/Uuzz3aJBv7EBN7JH8A==
+follow-redirects@^1.14.7:
+  version "1.14.7"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.7.tgz#2004c02eb9436eee9a21446a6477debf17e81685"
+  integrity sha512-+hbxoLbFMbRKDwohX8GkTataGqO6Jb7jGwpAlwgy2bIz25XtRm7KEzJM76R1WiNT5SwZkX4Y75SwBolkpmE7iQ==
 
 foreach@^2.0.5:
   version "2.0.5"
@@ -933,10 +933,10 @@ supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
-telegram@2.2.3:
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/telegram/-/telegram-2.2.3.tgz#5cd90925d75b3ea3524f3695d7c2ddb26c5d1df6"
-  integrity sha512-SVK8bNSf1mrvth/9vRUsZJ6NPE5LNNWL2Pn4RRufYMcARqP2Sus6b982SiGhK2HRl8UisOaV/Yhw4wxFr+bqIA==
+telegram@2.4.6:
+  version "2.4.6"
+  resolved "https://registry.yarnpkg.com/telegram/-/telegram-2.4.6.tgz#1c198968723af4ba6ec9176623156d29ca28479d"
+  integrity sha512-BEN4ZyQluhcaNFWt+qfxukg8PG+AO6HOXKEGtxi2/0AMk7o1ps8lg57Q1bIfLL8JNEejNsC8HdRMMKPLYVsyEg==
   dependencies:
     "@cryptography/aes" "^0.1.1"
     async-mutex "^0.3.0"
@@ -964,19 +964,19 @@ tg-file-id@1.1.2:
   resolved "https://registry.yarnpkg.com/tg-file-id/-/tg-file-id-1.1.2.tgz#ef6d7ec52cde00770d71dada04f3746eed97117f"
   integrity sha512-CP82EimaqVzI5ww7apIAOPkaKCx4kfAK11MPOw4YT7HXr9rbbPKWOIyIQV6dDUH2jBVM3lHDShXFS98u5+ABdQ==
 
-tgsnake@^2.0.0-alpha.6:
-  version "2.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/tgsnake/-/tgsnake-2.0.0-beta.8.tgz#669d10495bef746b1dcbe2b05476f7e36a79533b"
-  integrity sha512-87z3UyYwjLvPzWEHAaJv/easQLQMqhgX2hGNO49DM04Z9PN7Tf9UyvLepuc99zg+21nhoaY93hNPfkLxOqprkw==
+tgsnake@^2.0.0-beta.11:
+  version "2.0.0-beta.11"
+  resolved "https://registry.yarnpkg.com/tgsnake/-/tgsnake-2.0.0-beta.11.tgz#3dcf0726c8fd542f62bf92658361dc2a0a35cbb4"
+  integrity sha512-17OB6mF9o5qkBT5z+TpJiq3JmAvhhgX80nggfW44Qf0N6YtXtVN27txPOxNyGzOJ19p5hBKF0vR+ZB3Ngmlkdg==
   dependencies:
-    "@tgsnake/parser" "^1.0.0"
-    axios "0.24.0"
+    "@tgsnake/parser" "1.1.1"
+    axios "0.25.0"
     big-integer "1.6.51"
     chalk "4.1.2"
     file-type "16.5.3"
     husky "7.0.4"
     prompts "2.4.2"
-    telegram "2.2.3"
+    telegram "2.4.6"
     tg-file-id "1.1.2"
     util "^0.12.4"
 
