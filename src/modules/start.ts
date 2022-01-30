@@ -16,14 +16,13 @@ startComposer.command('start', (ctx) => {
   let now = getPing(ctx);
   let text = `Hi [${
     ctx.from.lastName ? ctx.from.firstName + ' ' + ctx.from.lastName : ctx.from.firstName
-  }](tg://user?id=${ctx.from.id})\ntype \`dots \\--help\` to see the help.`;
+  }](tg://user?id=${ctx.senderChat ? ctx.senderChat.id : ctx.from.id})\ntype \`dots \\--help\` to see the help.`;
   return ctx.replyWithMarkdown(
     `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`
   );
 });
 export const helpComposer = new Composer();
-helpComposer.prefix = 'd';
-helpComposer.command(['ots (--help|-h)'], (ctx) => {
+helpComposer.hears(new RegExp('dots (--help|-h)'), (ctx) => {
   let now = getPing(ctx);
   let moduleList: Array<string> = [];
   let fileList: Array<string> = fs.readdirSync(__dirname);
@@ -37,27 +36,29 @@ helpComposer.command(['ots (--help|-h)'], (ctx) => {
       }
     }
   }
-  let text = `**Dots v1.0.0**\n[tgsnake](https://tgsnake.js.org) v${
+  let text = `**Dots v1.2.0**\n[tgsnake](https://tgsnake.js.org) v${
     ctx.SnakeClient.version
   }\n\nhelper format : \`dots [\\--help | -h] [command name]\`\nExample : \`dots \\--help start\`\n**Available Command**\n${moduleList
     .sort((a, b) => a.localeCompare(b))
     .join(' | ')}`;
   return ctx.replyWithMarkdown(
-    `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`
+    `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`,{
+      noWebPage : true
+    }
   );
 });
-helpComposer.command(['ots (--help|-h) start', 'ots start (--help|-h)'], (ctx) => {
+helpComposer.hears([new RegExp('dots (--help|-h) start'), new RegExp('dots start (--help|-h)')], (ctx) => {
   let now = getPing(ctx);
   let text = `This is just a start message, why are you asking for help? lol.`;
   return ctx.replyWithMarkdown(
     `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`
   );
 });
-helpComposer.command('ots start', (ctx) => {
+helpComposer.hears(new RegExp('dots start'), (ctx) => {
   let now = getPing(ctx);
   let text = `Hi [${
     ctx.senderChat ? ctx.senderChat.title : ctx.from.lastName ? ctx.from.firstName + ' ' + ctx.from.lastName : ctx.from.firstName
-  }](tg://user?id=${ctx.from.id})\ntype \`dots \\--help\` to see the help.`;
+  }](tg://user?id=${ctx.senderChat ? ctx.senderChat.id : ctx.from.id})\ntype \`dots \\--help\` to see the help.`;
   return ctx.replyWithMarkdown(
     `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`
   );

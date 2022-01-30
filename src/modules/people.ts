@@ -23,7 +23,7 @@ peopleComposer.hears(
     );
   }
 );
-peopleComposer.command([new RegExp('dots people( (kick|-k))?')], async (ctx) => {
+peopleComposer.hears([new RegExp('dots people( (kick|-k))?')], async (ctx) => {
   let now = await getPing(ctx);
   if (ctx.chat.private) {
     let text = `👨🏻‍💻 This command only work in **group/supergroup**`;
