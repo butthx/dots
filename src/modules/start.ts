@@ -16,7 +16,7 @@ startComposer.command('start', (ctx) => {
   let now = getPing(ctx);
   let text = `Hi [${
     ctx.from.lastName ? ctx.from.firstName + ' ' + ctx.from.lastName : ctx.from.firstName
-  }](tg://user?id=${ctx.senderChat ? ctx.senderChat.id : ctx.from.id})\ntype \`dots \\--help\` to see the help.`;
+  }](tg://user?id=${ctx.from.id})\ntype \`dots \\--help\` to see the help.`;
   return ctx.replyWithMarkdown(
     `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`
   );
@@ -36,7 +36,7 @@ helpComposer.hears(new RegExp('dots (--help|-h)'), (ctx) => {
       }
     }
   }
-  let text = `**Dots v1.2.1**\n[tgsnake](https://tgsnake.js.org) v${
+  let text = `**Dots v1.2.2**\n[tgsnake](https://tgsnake.js.org) v${
     ctx.SnakeClient.version
   }\n\nhelper format : \`dots [\\--help | -h] [command name]\`\nExample : \`dots \\--help start\`\n**Available Command**\n${moduleList
     .sort((a, b) => a.localeCompare(b))
@@ -58,7 +58,7 @@ helpComposer.hears(new RegExp('dots start'), (ctx) => {
   let now = getPing(ctx);
   let text = `Hi [${
     ctx.senderChat ? ctx.senderChat.title : ctx.from.lastName ? ctx.from.firstName + ' ' + ctx.from.lastName : ctx.from.firstName
-  }](tg://user?id=${ctx.senderChat ? ctx.senderChat.id : ctx.from.id})\ntype \`dots \\--help\` to see the help.`;
+  }](tg://user?id=${ctx.from.id})\ntype \`dots \\--help\` to see the help.`;
   return ctx.replyWithMarkdown(
     `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`
   );
