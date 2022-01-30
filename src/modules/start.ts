@@ -36,14 +36,14 @@ helpComposer.hears(new RegExp('dots (--help|-h)'), (ctx) => {
       }
     }
   }
-  let text = `**Dots v1.2.0**\n[tgsnake](https://tgsnake.js.org) v${
+  let text = `**Dots v1.2.1**\n[tgsnake](https://tgsnake.js.org) v${
     ctx.SnakeClient.version
   }\n\nhelper format : \`dots [\\--help | -h] [command name]\`\nExample : \`dots \\--help start\`\n**Available Command**\n${moduleList
     .sort((a, b) => a.localeCompare(b))
     .join(' | ')}`;
   return ctx.replyWithMarkdown(
     `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`,{
-      noWebPage : true
+      noWebpage : true
     }
   );
 });
