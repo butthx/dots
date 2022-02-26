@@ -1,15 +1,16 @@
 ## Requirements 
 - nodejs@16 or latest
-- yarn@1 or latest
+- yarn@1 or latest *Recommend to install yarn berry version*
 ```bash
 npm i -g yarn
 ```
 ## Env 
-- `SESSION` - tgsnake string session, get it from https://replit.com/@butthx/TgSnakeGenerateSessions don't forget to login as bot.
+- `SESSION` - tgsnake string session, get it from https://tgsnake.js.org/login don't forget to login as bot.
 - `BOT_TOKEN` - Your bot token, get it from [botFather](https://t.me/botfather).
 - `API_HASH` - Your api hash, get it from my.telegram.org 
 - `API_ID` - Your api id, get it from my.telegram.org 
-- `MONGODB_URI` - Your mongodbURI.
+- `MONGODB_URI` - Your mongodbURI. 
+- `PREFIX` - the prefix command default is `dots`
 
 ## Local Deploy 
 ```bash 
