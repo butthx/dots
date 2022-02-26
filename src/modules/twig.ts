@@ -415,7 +415,7 @@ twigComposer.use(async (ctx, next) => {
           }
         }
       }
-      let re = new RegExp(`dots (--help|-h)?(\s+)?${moduleList.join('|')}`, 'g');
+      let re = new RegExp(`^${process.env.PREFIX || 'dots'} (--help|-h)?(\s+)?${moduleList.join('|')}`, 'g');
       //@ts-ignore
       if (re.test(update.text)) {
         return next();
