@@ -157,8 +157,11 @@ async function getPeople(ctx: MessageContext, args: Array<string> = []) {
     arr.splice(0, 0, String(arr.pop()));
     //@ts-ignore
     await ctx.telegram.editMessage(
+      //@ts-ignore
       msg.message.chat.id,
+      //@ts-ignore
       msg.message.id,
+      //@ts-ignore
       `${text}\n[${arr.join('')}] - ${Math.round((num / count) * 100)}%\n\n⏱️ ${now} | ⌛ ${getPing(
         ctx
       )} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`
