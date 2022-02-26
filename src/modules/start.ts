@@ -22,7 +22,7 @@ startComposer.command('start', (ctx) => {
   );
 });
 export const helpComposer = new Composer();
-helpComposer.hears(new RegExp('dots (--help|-h)'), (ctx) => {
+helpComposer.hears(new RegExp(`^${process.env.PREFIX || 'dots'} (--help|-h)`), (ctx) => {
   let now = getPing(ctx);
   let moduleList: Array<string> = [];
   let fileList: Array<string> = fs.readdirSync(__dirname);
@@ -36,28 +36,39 @@ helpComposer.hears(new RegExp('dots (--help|-h)'), (ctx) => {
       }
     }
   }
-  let text = `**Dots v1.2.2**\n[tgsnake](https://tgsnake.js.org) v${
+  let text = `**Dots v1.3.0**\n[tgsnake](https://tgsnake.js.org) v${
     ctx.SnakeClient.version
   }\n\nhelper format : \`dots [\\--help | -h] [command name]\`\nExample : \`dots \\--help start\`\n**Available Command**\n${moduleList
     .sort((a, b) => a.localeCompare(b))
     .join(' | ')}`;
   return ctx.replyWithMarkdown(
-    `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`,{
-      noWebpage : true
+    `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`,
+    {
+      noWebpage: true,
     }
   );
 });
-helpComposer.hears([new RegExp('dots (--help|-h) start'), new RegExp('dots start (--help|-h)')], (ctx) => {
-  let now = getPing(ctx);
-  let text = `This is just a start message, why are you asking for help? lol.`;
-  return ctx.replyWithMarkdown(
-    `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`
-  );
-});
-helpComposer.hears(new RegExp('dots start'), (ctx) => {
+helpComposer.hears(
+  [
+    new RegExp(`^${process.env.PREFIX || 'dots'} (--help|-h) start`),
+    new RegExp(`^${process.env.PREFIX || 'dots'} start (--help|-h)`),
+  ],
+  (ctx) => {
+    let now = getPing(ctx);
+    let text = `This is just a start message, why are you asking for help? lol.`;
+    return ctx.replyWithMarkdown(
+      `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`
+    );
+  }
+);
+helpComposer.hears(new RegExp(`^${process.env.PREFIX || 'dots'} start`), (ctx) => {
   let now = getPing(ctx);
   let text = `Hi [${
-    ctx.senderChat ? ctx.senderChat.title : ctx.from.lastName ? ctx.from.firstName + ' ' + ctx.from.lastName : ctx.from.firstName
+    ctx.senderChat
+      ? ctx.senderChat.title
+      : ctx.from.lastName
+      ? ctx.from.firstName + ' ' + ctx.from.lastName
+      : ctx.from.firstName
   }](tg://user?id=${ctx.from.id})\ntype \`dots \\--help\` to see the help.`;
   return ctx.replyWithMarkdown(
     `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`

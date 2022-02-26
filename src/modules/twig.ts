@@ -451,57 +451,26 @@ twigComposer.use(async (ctx, next) => {
     return next();
   }
 });
-twigComposer.hears([/^dots twig (\-\-help|\-h)$/, /^dots (\-\-help|\-h) twig$/], async (ctx) => {
-  let now = await getPing(ctx);
-  let text = `🌱 **Twig**\nUsing twig template to manage group.\n**Usage : **\`dots twig [options]\`\n**Options :**\n\`[\\--set | -s] - setup twig templates\`\n\`[\\--remove | -r] - remove twig templates\`\n**TypeUpdates :** All TypeUpdates should be same with [tgsnake](https://tgsnake.js.org/getting-started/update#using-on)\n\n**Example Template :**\n\`\`\`{% if on("message") %}\n  {{ telegram.reply("Hi, this is twig 🌱") }}\n{% endif %}\`\`\`\n\n**Notes** : **Dont delete your message before the process is complete.**`;
-  return ctx.replyWithMarkdown(
-    `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`,
-    {
-      noWebpage: true,
-    }
-  );
-});
-twigComposer.hears([/dots twig (\-\-set|\-s)$/], async (ctx) => {
-  let now = await getPing(ctx);
-  if (ctx.chat.private) {
-    let text = `🌱 This command only work in **group/supergroup!**`;
-    return ctx.replyWithMarkdown(
-      `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`
-    );
-  }
-  if (ctx.senderChat && !ctx.isAutomaticForward) {
-    let text = `It looks like you are an anonymous admin or admin using the channel to sending message. Click the button below to prove that you are really admin.`;
+twigComposer.hears(
+  [
+    new RegExp(`^${process.env.PREFIX || 'dots'} twig (--help|-h)$`),
+    new RegExp(`^${process.env.PREFIX || 'dots'} (--help|-h) twig$`),
+  ],
+  async (ctx) => {
+    let now = await getPing(ctx);
+    let text = `🌱 **Twig**\nUsing twig template to manage group.\n**Usage : **\`dots twig [options]\`\n**Options :**\n\`[\\--set | -s] - setup twig templates\`\n\`[\\--remove | -r] - remove twig templates\`\n**TypeUpdates :** All TypeUpdates should be same with [tgsnake](https://tgsnake.js.org/getting-started/update#using-on)\n\n**Example Template :**\n\`\`\`{% if on("message") %}\n  {{ telegram.reply("Hi, this is twig 🌱") }}\n{% endif %}\`\`\`\n\n**Notes** : **Dont delete your message before the process is complete.**`;
     return ctx.replyWithMarkdown(
       `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`,
       {
-        replyMarkup: {
-          inlineKeyboard: [
-            [
-              {
-                text: 'I am admin',
-                callbackData: 'dots twig set',
-              },
-            ],
-          ],
-        },
+        noWebpage: true,
       }
     );
-  } else {
-    //@ts-ignore
-    let member = await ctx.telegram.getChatMember(ctx.chat.id, ctx.from.id);
-    let allowed = ['creator', 'admin'];
-    if (allowed.includes(member.status)) {
-      return stage.enter('twig_set')(ctx);
-    }
-    let text = `Are you admin??`;
-    return ctx.replyWithMarkdown(
-      `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`
-    );
   }
-});
-twigComposer.hears([/dots twig (\-\-remove|\-r)$/], async (ctx) => {
-  let now = await getPing(ctx);
-  try {
+);
+twigComposer.hears(
+  [new RegExp(`^${process.env.PREFIX || 'dots'} twig (--set|-s)$`)],
+  async (ctx) => {
+    let now = await getPing(ctx);
     if (ctx.chat.private) {
       let text = `🌱 This command only work in **group/supergroup!**`;
       return ctx.replyWithMarkdown(
@@ -518,7 +487,7 @@ twigComposer.hears([/dots twig (\-\-remove|\-r)$/], async (ctx) => {
               [
                 {
                   text: 'I am admin',
-                  callbackData: 'dots twig remove',
+                  callbackData: 'dots twig set',
                 },
               ],
             ],
@@ -530,29 +499,72 @@ twigComposer.hears([/dots twig (\-\-remove|\-r)$/], async (ctx) => {
       let member = await ctx.telegram.getChatMember(ctx.chat.id, ctx.from.id);
       let allowed = ['creator', 'admin'];
       if (allowed.includes(member.status)) {
-        if (fs.existsSync(`./twigs/${ctx.chat.id}.twig`)) {
-          fs.unlinkSync(`./twigs/${ctx.chat.id}.twig`);
-        }
-        await TwigModel.findOneAndDelete({
-          chatId: String(ctx.chat.id),
-        });
-        let text = `🌱 Twig was removed.`;
-        return ctx.replyWithMarkdown(
-          `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`
-        );
+        return stage.enter('twig_set')(ctx);
       }
       let text = `Are you admin??`;
       return ctx.replyWithMarkdown(
         `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`
       );
     }
-  } catch (error: any) {
-    let text = `🌱 Twig Error : ${error.message}`;
-    return ctx.replyWithMarkdown(
-      `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`
-    );
   }
-});
+);
+twigComposer.hears(
+  [new RegExp(`^${process.env.PREFIX || 'dots'} twig (--remove|-r)$`)],
+  async (ctx) => {
+    let now = await getPing(ctx);
+    try {
+      if (ctx.chat.private) {
+        let text = `🌱 This command only work in **group/supergroup!**`;
+        return ctx.replyWithMarkdown(
+          `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`
+        );
+      }
+      if (ctx.senderChat && !ctx.isAutomaticForward) {
+        let text = `It looks like you are an anonymous admin or admin using the channel to sending message. Click the button below to prove that you are really admin.`;
+        return ctx.replyWithMarkdown(
+          `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`,
+          {
+            replyMarkup: {
+              inlineKeyboard: [
+                [
+                  {
+                    text: 'I am admin',
+                    callbackData: 'dots twig remove',
+                  },
+                ],
+              ],
+            },
+          }
+        );
+      } else {
+        //@ts-ignore
+        let member = await ctx.telegram.getChatMember(ctx.chat.id, ctx.from.id);
+        let allowed = ['creator', 'admin'];
+        if (allowed.includes(member.status)) {
+          if (fs.existsSync(`./twigs/${ctx.chat.id}.twig`)) {
+            fs.unlinkSync(`./twigs/${ctx.chat.id}.twig`);
+          }
+          await TwigModel.findOneAndDelete({
+            chatId: String(ctx.chat.id),
+          });
+          let text = `🌱 Twig was removed.`;
+          return ctx.replyWithMarkdown(
+            `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`
+          );
+        }
+        let text = `Are you admin??`;
+        return ctx.replyWithMarkdown(
+          `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`
+        );
+      }
+    } catch (error: any) {
+      let text = `🌱 Twig Error : ${error.message}`;
+      return ctx.replyWithMarkdown(
+        `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`
+      );
+    }
+  }
+);
 
 twigComposer.action('dots twig set', twigSet);
 twigComposer.action('dots twig cancel', twigCancel);

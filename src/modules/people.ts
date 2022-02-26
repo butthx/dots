@@ -14,7 +14,10 @@ const Api = GramJs.Api;
 export const peopleComposer = new Composer();
 export const modules = ['people'];
 peopleComposer.hears(
-  [new RegExp('dots (help|-h) people'), new RegExp('dots people (help|-h)')],
+  [
+    new RegExp(`^${process.env.PREFIX || 'dots'} (--help|-h) people`),
+    new RegExp(`^${process.env.PREFIX || 'dots'} people (--help|-h)`),
+  ],
   (ctx) => {
     let now = getPing(ctx);
     let text = `👨🏻‍💻 **People**\nChecking the members status of groups/channel.\n**Usage : **\`dots people [options]\`\n**Options :**\n\`[\\--kick | -k] [longTimeAgo|restricted|bot|deletedAccount] - checking members with kicking specific filters\`\n**Notes**:\n• **You can only fetch new data once every 30 minutes.**\n• **Don't delete your message before process completed.**`;
@@ -23,52 +26,55 @@ peopleComposer.hears(
     );
   }
 );
-peopleComposer.hears([new RegExp('dots people( (kick|-k))?')], async (ctx) => {
-  let now = await getPing(ctx);
-  if (ctx.chat.private) {
-    let text = `👨🏻‍💻 This command only work in **group/supergroup**`;
-    return ctx.replyWithMarkdown(
-      `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`
-    );
-  }
-  if (ctx.text) {
-    let spl = ctx.text.split(' ');
-    if (spl.length > 3) {
-      spl.splice(0, 3);
-    } else {
-      spl = [];
-    }
-    if (ctx.senderChat && !ctx.isAutomaticForward) {
-      let text = `It looks like you are an anonymous admin or admin using the channel to sending message. Click the button below to prove that you are really admin.`;
-      return ctx.replyWithMarkdown(
-        `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`,
-        {
-          replyMarkup: {
-            inlineKeyboard: [
-              [
-                {
-                  text: 'I am admin',
-                  callbackData: 'dots people',
-                },
-              ],
-            ],
-          },
-        }
-      );
-    } else {
-      //@ts-ignore
-      let member = await ctx.telegram.getChatMember(ctx.chat.id, ctx.from.id);
-      let allowed = ['creator', 'admin'];
-      if (allowed.includes(member.status)) {
-        return getPeople(ctx, spl);
-      }
-      let text = `Are you admin??`;
+peopleComposer.hears(
+  [new RegExp(`^${process.env.PREFIX || 'dots'} people( (kick|-k))?`)],
+  async (ctx) => {
+    let now = await getPing(ctx);
+    if (ctx.chat.private) {
+      let text = `👨🏻‍💻 This command only work in **group/supergroup**`;
       return ctx.replyWithMarkdown(
         `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`
       );
     }
+    if (ctx.text) {
+      let spl = ctx.text.split(' ');
+      if (spl.length > 3) {
+        spl.splice(0, 3);
+      } else {
+        spl = [];
+      }
+      if (ctx.senderChat && !ctx.isAutomaticForward) {
+        let text = `It looks like you are an anonymous admin or admin using the channel to sending message. Click the button below to prove that you are really admin.`;
+        return ctx.replyWithMarkdown(
+          `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`,
+          {
+            replyMarkup: {
+              inlineKeyboard: [
+                [
+                  {
+                    text: 'I am admin',
+                    callbackData: 'dots people',
+                  },
+                ],
+              ],
+            },
+          }
+        );
+      } else {
+        //@ts-ignore
+        let member = await ctx.telegram.getChatMember(ctx.chat.id, ctx.from.id);
+        let allowed = ['creator', 'admin'];
+        if (allowed.includes(member.status)) {
+          return getPeople(ctx, spl);
+        }
+        let text = `Are you admin??`;
+        return ctx.replyWithMarkdown(
+          `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`
+        );
+      }
+    }
   }
-});
+);
 function getLoop(member: number, limit: number = 200) {
   let a = member / 200;
   return a % 1 === 0 ? Math.floor(a) : Math.floor(a) + 1;
@@ -109,35 +115,37 @@ async function getPeople(ctx: MessageContext, args: Array<string> = []) {
       }
       //@ts-ignore
       let member = members.participants[i];
-      switch (member.user.status) {
-        case 'online':
-          people_online.push(member.user.id);
-          break;
-        case 'offline':
-          people_offline.push(member.user.id);
-          break;
-        case 'recently':
-          people_recently.push(member.user.id);
-          break;
-        case 'withinWeek':
-          people_within_week.push(member.user.id);
-          break;
-        case 'withinMonth':
-          people_within_month.push(member.user.id);
-          break;
-        case 'longTimeAgo':
-          people_long_time_ago.push(member.user.id);
-          break;
-        default:
+      if (member.user) {
+        switch (member.user.status) {
+          case 'online':
+            people_online.push(member.user.id);
+            break;
+          case 'offline':
+            people_offline.push(member.user.id);
+            break;
+          case 'recently':
+            people_recently.push(member.user.id);
+            break;
+          case 'withinWeek':
+            people_within_week.push(member.user.id);
+            break;
+          case 'withinMonth':
+            people_within_month.push(member.user.id);
+            break;
+          case 'longTimeAgo':
+            people_long_time_ago.push(member.user.id);
+            break;
+          default:
+        }
+        if (member.user.deleted) people_deleted.push(member.user.id);
+        if (member.user.fake) people_fake.push(member.user.id);
+        if (member.user.scam) people_scam.push(member.user.id);
+        if (member.user.bot) people_bot.push(member.user.id);
+        if (member.user.verified) people_verified.push(member.user.id);
+        if (member.user.restricted) people_restricted.push(member.user.id);
+        let admin = ['admin', 'creator'];
+        if (admin.includes(member.status)) people_admin.push(member.user.id);
       }
-      if (member.user.deleted) people_deleted.push(member.user.id);
-      if (member.user.fake) people_fake.push(member.user.id);
-      if (member.user.scam) people_scam.push(member.user.id);
-      if (member.user.bot) people_bot.push(member.user.id);
-      if (member.user.verified) people_verified.push(member.user.id);
-      if (member.user.restricted) people_restricted.push(member.user.id);
-      let admin = ['admin', 'creator'];
-      if (admin.includes(member.status)) people_admin.push(member.user.id);
       i++;
     }
     return true;
@@ -161,7 +169,7 @@ async function getPeople(ctx: MessageContext, args: Array<string> = []) {
       people_verified = file.people_verified;
       people_restricted = file.people_restricted;
       people_admin = file.people_admin;
-    }else {
+    } else {
       if (loop > 1) {
         let offset = 0;
         for (let i = 0; i < loop; i++) {
