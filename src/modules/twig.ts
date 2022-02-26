@@ -415,7 +415,10 @@ twigComposer.use(async (ctx, next) => {
           }
         }
       }
-      let re = new RegExp(`^${process.env.PREFIX || 'dots'} (--help|-h)?(\s+)?${moduleList.join('|')}`, 'g');
+      let re = new RegExp(
+        `^${process.env.PREFIX_CMD || 'dots'} (--help|-h)?(\s+)?${moduleList.join('|')}`,
+        'g'
+      );
       //@ts-ignore
       if (re.test(update.text)) {
         return next();
@@ -453,8 +456,8 @@ twigComposer.use(async (ctx, next) => {
 });
 twigComposer.hears(
   [
-    new RegExp(`^${process.env.PREFIX || 'dots'} twig (--help|-h)$`),
-    new RegExp(`^${process.env.PREFIX || 'dots'} (--help|-h) twig$`),
+    new RegExp(`^${process.env.PREFIX_CMD || 'dots'} twig (--help|-h)$`),
+    new RegExp(`^${process.env.PREFIX_CMD || 'dots'} (--help|-h) twig$`),
   ],
   async (ctx) => {
     let now = await getPing(ctx);
@@ -468,7 +471,7 @@ twigComposer.hears(
   }
 );
 twigComposer.hears(
-  [new RegExp(`^${process.env.PREFIX || 'dots'} twig (--set|-s)$`)],
+  [new RegExp(`^${process.env.PREFIX_CMD || 'dots'} twig (--set|-s)$`)],
   async (ctx) => {
     let now = await getPing(ctx);
     if (ctx.chat.private) {
@@ -509,7 +512,7 @@ twigComposer.hears(
   }
 );
 twigComposer.hears(
-  [new RegExp(`^${process.env.PREFIX || 'dots'} twig (--remove|-r)$`)],
+  [new RegExp(`^${process.env.PREFIX_CMD || 'dots'} twig (--remove|-r)$`)],
   async (ctx) => {
     let now = await getPing(ctx);
     try {

@@ -15,8 +15,8 @@ export const peopleComposer = new Composer();
 export const modules = ['people'];
 peopleComposer.hears(
   [
-    new RegExp(`^${process.env.PREFIX || 'dots'} (--help|-h) people`),
-    new RegExp(`^${process.env.PREFIX || 'dots'} people (--help|-h)`),
+    new RegExp(`^${process.env.PREFIX_CMD || 'dots'} (--help|-h) people$`),
+    new RegExp(`^${process.env.PREFIX_CMD || 'dots'} people (--help|-h)$`),
   ],
   (ctx) => {
     let now = getPing(ctx);
@@ -27,7 +27,7 @@ peopleComposer.hears(
   }
 );
 peopleComposer.hears(
-  [new RegExp(`^${process.env.PREFIX || 'dots'} people( (kick|-k))?`)],
+  [new RegExp(`^${process.env.PREFIX_CMD || 'dots'} people( (kick|-k))?`)],
   async (ctx) => {
     let now = await getPing(ctx);
     if (ctx.chat.private) {
@@ -82,8 +82,11 @@ function getLoop(member: number, limit: number = 200) {
 async function getPeople(ctx: MessageContext, args: Array<string> = []) {
   let now = await getPing(ctx);
   let text = `Please Wait...`;
+  let arr = ['=', 'ㅤ', 'ㅤ', 'ㅤ', 'ㅤ'];
   let msg = await ctx.replyWithMarkdown(
-    `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`
+    `${text}\n[${arr.join('')}] - 0%\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${
+      ctx.SnakeClient.connectTime
+    }\` s`
   );
   let count = await ctx.telegram.getChatMembersCount(ctx.chat.id);
   //@ts-ignore
@@ -150,6 +153,17 @@ async function getPeople(ctx: MessageContext, args: Array<string> = []) {
     }
     return true;
   };
+  let progress = async (num) => {
+    arr.splice(0, 0, String(arr.pop()));
+    //@ts-ignore
+    await ctx.telegram.editMessage(
+      msg.message.chat.id,
+      msg.message.id,
+      `${text}\n[${arr.join('')}] - ${Math.round((num / count) * 100)}%\n\n⏱️ ${now} | ⌛ ${getPing(
+        ctx
+      )} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`
+    );
+  };
   if (fs.existsSync(`./people/${ctx.chat.id}.json`)) {
     let stat = fs.statSync(`./people/${ctx.chat.id}.json`);
     let seconds = (new Date().getTime() - new Date(stat.mtime).getTime()) / 1000;
@@ -176,6 +190,7 @@ async function getPeople(ctx: MessageContext, args: Array<string> = []) {
           if (i > 0) {
             offset = offset + 200;
           }
+          await progress(offset);
           await run(offset);
         }
       } else {
@@ -189,12 +204,14 @@ async function getPeople(ctx: MessageContext, args: Array<string> = []) {
         if (i > 0) {
           offset = offset + 200;
         }
+        await progress(offset);
         await run(offset);
       }
     } else {
       await run(0);
     }
   }
+  await progress(count);
   if (!fs.existsSync('./people')) {
     fs.mkdirSync('./people');
   }
@@ -253,7 +270,7 @@ async function getPeople(ctx: MessageContext, args: Array<string> = []) {
             for (let id of people_online) {
               setTimeout(() => {
                 try {
-                  ctx.telegram.editBanned(ctx.chat.id, id);
+                  ctx.telegram.kickChatMember(ctx.chat.id, id);
                   return true;
                 } catch (error) {
                   return false;
@@ -267,7 +284,7 @@ async function getPeople(ctx: MessageContext, args: Array<string> = []) {
             for (let id of people_offline) {
               setTimeout(() => {
                 try {
-                  ctx.telegram.editBanned(ctx.chat.id, id);
+                  ctx.telegram.kickChatMember(ctx.chat.id, id);
                   return true;
                 } catch (error) {
                   return false;
@@ -281,7 +298,7 @@ async function getPeople(ctx: MessageContext, args: Array<string> = []) {
             for (let id of people_recently) {
               setTimeout(() => {
                 try {
-                  ctx.telegram.editBanned(ctx.chat.id, id);
+                  ctx.telegram.kickChatMember(ctx.chat.id, id);
                   return true;
                 } catch (error) {
                   return false;
@@ -296,7 +313,7 @@ async function getPeople(ctx: MessageContext, args: Array<string> = []) {
             for (let id of people_within_week) {
               setTimeout(() => {
                 try {
-                  ctx.telegram.editBanned(ctx.chat.id, id);
+                  ctx.telegram.kickChatMember(ctx.chat.id, id);
                   return true;
                 } catch (error) {
                   return false;
@@ -311,7 +328,7 @@ async function getPeople(ctx: MessageContext, args: Array<string> = []) {
             for (let id of people_within_month) {
               setTimeout(() => {
                 try {
-                  ctx.telegram.editBanned(ctx.chat.id, id);
+                  ctx.telegram.kickChatMember(ctx.chat.id, id);
                   return true;
                 } catch (error) {
                   return false;
@@ -326,7 +343,7 @@ async function getPeople(ctx: MessageContext, args: Array<string> = []) {
             for (let id of people_long_time_ago) {
               setTimeout(() => {
                 try {
-                  ctx.telegram.editBanned(ctx.chat.id, id);
+                  ctx.telegram.kickChatMember(ctx.chat.id, id);
                   return true;
                 } catch (error) {
                   return false;
@@ -342,7 +359,7 @@ async function getPeople(ctx: MessageContext, args: Array<string> = []) {
             for (let id of people_deleted) {
               setTimeout(() => {
                 try {
-                  ctx.telegram.editBanned(ctx.chat.id, id);
+                  ctx.telegram.kickChatMember(ctx.chat.id, id);
                   return true;
                 } catch (error) {
                   return false;
@@ -356,7 +373,7 @@ async function getPeople(ctx: MessageContext, args: Array<string> = []) {
             for (let id of people_fake) {
               setTimeout(() => {
                 try {
-                  ctx.telegram.editBanned(ctx.chat.id, id);
+                  ctx.telegram.kickChatMember(ctx.chat.id, id);
                   return true;
                 } catch (error) {
                   return false;
@@ -370,7 +387,7 @@ async function getPeople(ctx: MessageContext, args: Array<string> = []) {
             for (let id of people_scam) {
               setTimeout(() => {
                 try {
-                  ctx.telegram.editBanned(ctx.chat.id, id);
+                  ctx.telegram.kickChatMember(ctx.chat.id, id);
                   return true;
                 } catch (error) {
                   return false;
@@ -384,7 +401,7 @@ async function getPeople(ctx: MessageContext, args: Array<string> = []) {
             for (let id of people_bot) {
               setTimeout(() => {
                 try {
-                  ctx.telegram.editBanned(ctx.chat.id, id);
+                  ctx.telegram.kickChatMember(ctx.chat.id, id);
                   return true;
                 } catch (error) {
                   return false;
@@ -398,7 +415,7 @@ async function getPeople(ctx: MessageContext, args: Array<string> = []) {
             for (let id of people_verified) {
               setTimeout(() => {
                 try {
-                  ctx.telegram.editBanned(ctx.chat.id, id);
+                  ctx.telegram.kickChatMember(ctx.chat.id, id);
                   return true;
                 } catch (error) {
                   return false;
@@ -412,7 +429,7 @@ async function getPeople(ctx: MessageContext, args: Array<string> = []) {
             for (let id of people_restricted) {
               setTimeout(() => {
                 try {
-                  ctx.telegram.editBanned(ctx.chat.id, id);
+                  ctx.telegram.kickChatMember(ctx.chat.id, id);
                   return true;
                 } catch (error) {
                   return false;

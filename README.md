@@ -10,7 +10,7 @@ npm i -g yarn
 - `API_HASH` - Your api hash, get it from my.telegram.org 
 - `API_ID` - Your api id, get it from my.telegram.org 
 - `MONGODB_URI` - Your mongodbURI. 
-- `PREFIX` - the prefix command default is `dots`
+- `PREFIX_CMD` - the prefix command default is `dots`
 
 ## Local Deploy 
 ```bash 

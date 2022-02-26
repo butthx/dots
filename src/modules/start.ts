@@ -16,13 +16,15 @@ startComposer.command('start', (ctx) => {
   let now = getPing(ctx);
   let text = `Hi [${
     ctx.from.lastName ? ctx.from.firstName + ' ' + ctx.from.lastName : ctx.from.firstName
-  }](tg://user?id=${ctx.from.id})\ntype \`${process.env.PREFIX || 'dots'} \\--help\` to see the help.`;
+  }](tg://user?id=${ctx.from.id})\ntype \`${
+    process.env.PREFIX_CMD || 'dots'
+  } \\--help\` to see the help.`;
   return ctx.replyWithMarkdown(
     `${text}\n\n⏱️ ${now} | ⌛ ${getPing(ctx)} | ⏰ \`${ctx.SnakeClient.connectTime}\` s`
   );
 });
 export const helpComposer = new Composer();
-helpComposer.hears(new RegExp(`^${process.env.PREFIX || 'dots'} (--help|-h)`), (ctx) => {
+helpComposer.hears(new RegExp(`^${process.env.PREFIX_CMD || 'dots'} (--help|-h)$`), (ctx) => {
   let now = getPing(ctx);
   let moduleList: Array<string> = [];
   let fileList: Array<string> = fs.readdirSync(__dirname);
@@ -38,7 +40,11 @@ helpComposer.hears(new RegExp(`^${process.env.PREFIX || 'dots'} (--help|-h)`), (
   }
   let text = `**Dots v1.3.0**\n[tgsnake](https://tgsnake.js.org) v${
     ctx.SnakeClient.version
-  }\n\nhelper format : \`${process.env.PREFIX || 'dots'} [\\--help | -h] [command name]\`\nExample : \`${process.env.PREFIX || 'dots'} \\--help start\`\n**Available Command**\n${moduleList
+  }\n\nhelper format : \`${
+    process.env.PREFIX_CMD || 'dots'
+  } [\\--help | -h] [command name]\`\nExample : \`${
+    process.env.PREFIX_CMD || 'dots'
+  } \\--help start\`\n**Available Command**\n${moduleList
     .sort((a, b) => a.localeCompare(b))
     .join(' | ')}`;
   return ctx.replyWithMarkdown(
@@ -50,8 +56,8 @@ helpComposer.hears(new RegExp(`^${process.env.PREFIX || 'dots'} (--help|-h)`), (
 });
 helpComposer.hears(
   [
-    new RegExp(`^${process.env.PREFIX || 'dots'} (--help|-h) start`),
-    new RegExp(`^${process.env.PREFIX || 'dots'} start (--help|-h)`),
+    new RegExp(`^${process.env.PREFIX_CMD || 'dots'} (--help|-h) start$`),
+    new RegExp(`^${process.env.PREFIX_CMD || 'dots'} start (--help|-h)$`),
   ],
   (ctx) => {
     let now = getPing(ctx);
@@ -61,7 +67,7 @@ helpComposer.hears(
     );
   }
 );
-helpComposer.hears(new RegExp(`^${process.env.PREFIX || 'dots'} start`), (ctx) => {
+helpComposer.hears(new RegExp(`^${process.env.PREFIX_CMD || 'dots'} start$`), (ctx) => {
   let now = getPing(ctx);
   let text = `Hi [${
     ctx.senderChat

@@ -75,10 +75,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tgsnake/wizard-scenes@npm:^1.0.2":
-  version: 1.2.1
-  resolution: "@tgsnake/wizard-scenes@npm:1.2.1"
-  checksum: 8bbb9fa9d89ece9622d4d2ca8928bc0d6d8f4af3df1adbce7e416619742ea07dc58459676136ba8cbcdc959d61314b0e6db6affcbe5490c45777f8c8fa51fc0f
+"@tgsnake/wizard-scenes@npm:^1.2.3":
+  version: 1.2.3
+  resolution: "@tgsnake/wizard-scenes@npm:1.2.3"
+  checksum: aa2fec1040daaef2d15ba38fa54317ae7086b2d0b00906e55f62e5410b919c1341b0d7c93d64a64ae2cb94034d64e84c39c0a9359a405ef9bdf02d550bc09359
   languageName: node
   linkType: hard
 
@@ -131,17 +131,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:< 17.0.6":
-  version: 17.0.5
-  resolution: "@types/node@npm:17.0.5"
-  checksum: 105535e78722515c26cfdc1b0cbf1b19f55fe53b814e2e90d8b1e653bc63136d4760c7efc102eca111c6d124a291e37d60d761d569a3f4afb3fba05bad5d9ade
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:^16.11.9":
-  version: 16.11.19
-  resolution: "@types/node@npm:16.11.19"
-  checksum: a9ba0cd1e61c8ad50f3fc9c2b37b795bf0286dacb39dcc985da90328abf0c5151dffe9932d20bc9a6a52c3ce7bfc1e5a7c2dc1416480fb84f1c2d70e25caeba0
+"@types/node@npm:^17.0.21":
+  version: 17.0.21
+  resolution: "@types/node@npm:17.0.21"
+  checksum: 89dcd2fe82f21d3634266f8384e9c865cf8af49685639fbdbd799bdd1040480fb1e8eeda2d3b9fce41edbe704d2a4be9f427118c4ae872e8d9bb7cbeb3c41a94
   languageName: node
   linkType: hard
 
@@ -318,7 +311,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bson@npm:^4.2.2, bson@npm:^4.6.0":
+"bson@npm:^4.2.2, bson@npm:^4.6.1":
   version: 4.6.1
   resolution: "bson@npm:4.6.1"
   dependencies:
@@ -569,10 +562,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:^10.0.0":
-  version: 10.0.0
-  resolution: "dotenv@npm:10.0.0"
-  checksum: f412c5fe8c24fbe313d302d2500e247ba8a1946492db405a4de4d30dd0eb186a88a43f13c958c5a7de303938949c4231c56994f97d05c4bc1f22478d631b4005
+"dotenv@npm:^16.0.0":
+  version: 16.0.0
+  resolution: "dotenv@npm:16.0.0"
+  checksum: 664cebb51f0a9a1d1b930f51f0271e72e26d62feaecc9dc03df39453dd494b4e724809ca480fb3ec3213382b1ed3f791aaeb83569a137f9329ce58efd4853dbf
   languageName: node
   linkType: hard
 
@@ -580,16 +573,16 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "dots@workspace:."
   dependencies:
-    "@tgsnake/wizard-scenes": ^1.0.2
-    "@types/node": ^16.11.9
+    "@tgsnake/wizard-scenes": ^1.2.3
+    "@types/node": ^17.0.21
     big-integer: ^1.6.51
-    dotenv: ^10.0.0
-    mongoose: ^6.1.4
+    dotenv: ^16.0.0
+    mongoose: ^6.2.3
     prettier: ^2.5.1
-    tgsnake: ^2.0.0-beta.11
-    ts-node: ^10.4.0
+    tgsnake: ^2.0.0-beta.17
+    ts-node: ^10.5.0
     twig: ^1.15.4
-    typescript: ^4.5.2
+    typescript: ^4.5.5
   languageName: unknown
   linkType: soft
 
@@ -1177,10 +1170,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"kareem@npm:2.3.3":
-  version: 2.3.3
-  resolution: "kareem@npm:2.3.3"
-  checksum: 6acbfeadce9b781844bfce6ecb8f721af2e6453c55e42d14bc9cf337cf4748bc4a084f915c4206e12d33f1c973f65d5010afb6e225b1f772a7b6e40e84da4efc
+"kareem@npm:2.3.4":
+  version: 2.3.4
+  resolution: "kareem@npm:2.3.4"
+  checksum: e12d05e120515c0ded270eb47792e7b1eb3d2656f74a57050e59c8d0a21212c02c7dc5e0acfaa75f89637c5b13d3dfef53218be33c4d3c7d531ef44a68df7478
   languageName: node
   linkType: hard
 
@@ -1358,46 +1351,44 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb-connection-string-url@npm:^2.3.2":
-  version: 2.4.1
-  resolution: "mongodb-connection-string-url@npm:2.4.1"
+"mongodb-connection-string-url@npm:^2.4.1":
+  version: 2.5.2
+  resolution: "mongodb-connection-string-url@npm:2.5.2"
   dependencies:
     "@types/whatwg-url": ^8.2.1
     whatwg-url: ^11.0.0
-  checksum: 119c908ab543f75cf80e2b29b1034071d85d8c59a93515125b10bf97b428a1c051a1dc011388961fcc733fc48972a375d70d5a8e7faa0ac7c5ab701aff7678bd
+  checksum: bd13af7d62d33e2d6e5217692961e34b2dafbbba5f41d361417257592754df3e925efc00fa8a5e038624e284245dab39e913d5f06ff962feede86d5f58fc5827
   languageName: node
   linkType: hard
 
-"mongodb@npm:4.2.2":
-  version: 4.2.2
-  resolution: "mongodb@npm:4.2.2"
+"mongodb@npm:4.3.1":
+  version: 4.3.1
+  resolution: "mongodb@npm:4.3.1"
   dependencies:
-    bson: ^4.6.0
+    bson: ^4.6.1
     denque: ^2.0.1
-    mongodb-connection-string-url: ^2.3.2
+    mongodb-connection-string-url: ^2.4.1
     saslprep: ^1.0.3
+    socks: ^2.6.1
   dependenciesMeta:
     saslprep:
       optional: true
-  checksum: 645cc8889ee093c0d6479638aa4f5b3e587b84be5179a35993f0796fda6b25d22c4b6f7d5f27b4d23c3aacb694db2ff696ea0a5080ddc745508ffff95131f3b5
+  checksum: 5684b5481bfbf73e4628b8bad7018cd4436fdb23b9548fb38dece3e079b1716fe870d41070a505d13ae4d86c107315afaf34891ba2b64925eb4fa4cd5bb70300
   languageName: node
   linkType: hard
 
-"mongoose@npm:^6.1.4":
-  version: 6.1.5
-  resolution: "mongoose@npm:6.1.5"
+"mongoose@npm:^6.2.3":
+  version: 6.2.3
+  resolution: "mongoose@npm:6.2.3"
   dependencies:
-    "@types/node": < 17.0.6
     bson: ^4.2.2
-    kareem: 2.3.3
-    mongodb: 4.2.2
+    kareem: 2.3.4
+    mongodb: 4.3.1
     mpath: 0.8.4
-    mquery: 4.0.0
-    ms: 2.1.2
-    regexp-clone: 1.0.0
-    sift: 13.5.2
-    sliced: 1.0.1
-  checksum: a67801fe126fdf168343cd0bb0af29041569c11585f350aa3946387c565b16e050ddba5e519a654bf9fb4b6148f4692392c34a6e4ccceded43aa458433debedd
+    mquery: 4.0.2
+    ms: 2.1.3
+    sift: 16.0.0
+  checksum: d18ff711bf2174255143641a8d37f9a536aa7d445754d9befa461f2bd12b78d29e0cf6ef65f5d8b8ec87959594be541c7cc565227230ae0a3c3a0fe708f62123
   languageName: node
   linkType: hard
 
@@ -1408,14 +1399,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mquery@npm:4.0.0":
-  version: 4.0.0
-  resolution: "mquery@npm:4.0.0"
+"mquery@npm:4.0.2":
+  version: 4.0.2
+  resolution: "mquery@npm:4.0.2"
   dependencies:
     debug: 4.x
-    regexp-clone: ^1.0.0
-    sliced: 1.0.1
-  checksum: bfa776dfe67bb821a8199e02c01e51ca53020c552f3a7a137520e2ce3283b62ba05b50322d173d46f0e04b5eab0e2bdb5003e61019680e267c4776fe866b6306
+  checksum: 39ac308294fe26fe214fd117a9a2e92f754ee00193d3d8602b23c13cf677688faf8417fc74fa18940d51358bf04105ce279364a396b35fd23d73d452f860a098
   languageName: node
   linkType: hard
 
@@ -1433,7 +1422,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ms@npm:^2.0.0":
+"ms@npm:2.1.3, ms@npm:^2.0.0":
   version: 2.1.3
   resolution: "ms@npm:2.1.3"
   checksum: aa92de608021b242401676e35cfa5aa42dd70cbdc082b916da7fb925c542173e36bce97ea3e804923fe92c0ad991434e4a38327e15a1b5b5f945d66df615ae6d
@@ -1673,13 +1662,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"regexp-clone@npm:1.0.0, regexp-clone@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "regexp-clone@npm:1.0.0"
-  checksum: ca4960bbdc4237c84813b12aed351606be7db60a8c8867ef46b44f00eec4e83f51b31de34e294900517db9d7a39636117af80916f6ce7dc45ea00cae3c6d6fc3
-  languageName: node
-  linkType: hard
-
 "retry@npm:^0.12.0":
   version: 0.12.0
   resolution: "retry@npm:0.12.0"
@@ -1750,10 +1732,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sift@npm:13.5.2":
-  version: 13.5.2
-  resolution: "sift@npm:13.5.2"
-  checksum: 31951836c464b995b25f888876dea9c58c7a3eaa419d2ed271776d55db2d1019c6438ee458047d3c16bc93f0a329366dc535dc3a6afc42038949dc2a6a548f61
+"sift@npm:16.0.0":
+  version: 16.0.0
+  resolution: "sift@npm:16.0.0"
+  checksum: 88d5754afe16fbaf4274223e492f4aa382c44070bc63b84b9dcfe0f16f65ff64361c4e642b2ae65dfe33a85170a6ecc378ca44487302a88835f58fe152e62894
   languageName: node
   linkType: hard
 
@@ -1768,13 +1750,6 @@ __metadata:
   version: 1.0.5
   resolution: "sisteransi@npm:1.0.5"
   checksum: aba6438f46d2bfcef94cf112c835ab395172c75f67453fe05c340c770d3c402363018ae1ab4172a1026a90c47eaccf3af7b6ff6fa749a680c2929bd7fa2b37a4
-  languageName: node
-  linkType: hard
-
-"sliced@npm:1.0.1":
-  version: 1.0.1
-  resolution: "sliced@npm:1.0.1"
-  checksum: 84528d23279985ead75809eeec5d601b0fb6bc28348c6627f4feb40747533a1e36a75e8bc60f9079528079b21c434890b397e8fc5c24a649165cc0bbe90b4d70
   languageName: node
   linkType: hard
 
@@ -1959,9 +1934,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tgsnake@npm:^2.0.0-beta.11":
-  version: 2.0.0-beta.11
-  resolution: "tgsnake@npm:2.0.0-beta.11"
+"tgsnake@npm:^2.0.0-beta.17":
+  version: 2.0.0-beta.17
+  resolution: "tgsnake@npm:2.0.0-beta.17"
   dependencies:
     "@tgsnake/parser": 1.1.1
     axios: 0.25.0
@@ -1973,7 +1948,7 @@ __metadata:
     telegram: 2.4.6
     tg-file-id: 1.1.2
     util: ^0.12.4
-  checksum: b7fd207e3e4a09db8b4e8d5a2339c66bd4f281261e7400b4cfb15fa3aacc61a842bc6ff88e5ae520c6a3bc18ef744ded9dc71723f9f3e5abfde7d9fca6e5a015
+  checksum: f8fe9abb14e7fb38bc6b635fd5fdfed6d887170c54b47c7da1ecb4919c1e777224104306fff8f9396349533d8d9805b0a1964d8eabb32fb7a6d7a3649853e46a
   languageName: node
   linkType: hard
 
@@ -2003,9 +1978,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-node@npm:^10.4.0":
-  version: 10.4.0
-  resolution: "ts-node@npm:10.4.0"
+"ts-node@npm:^10.5.0":
+  version: 10.5.0
+  resolution: "ts-node@npm:10.5.0"
   dependencies:
     "@cspotcode/source-map-support": 0.7.0
     "@tsconfig/node10": ^1.0.7
@@ -2018,6 +1993,7 @@ __metadata:
     create-require: ^1.1.0
     diff: ^4.0.1
     make-error: ^1.1.1
+    v8-compile-cache-lib: ^3.0.0
     yn: 3.1.1
   peerDependencies:
     "@swc/core": ">=1.2.50"
@@ -2035,7 +2011,7 @@ __metadata:
     ts-node-script: dist/bin-script.js
     ts-node-transpile-only: dist/bin-transpile.js
     ts-script: dist/bin-script-deprecated.js
-  checksum: 3933ac0a937d33c45e04a6750fcdd3e765eb2897d1da1307cd97ac52af093bcfb632ec0453a75000a65c8b5b7bdb32b1077050a186dcc556e62657cb592e6d49
+  checksum: d51ac8a9b3582ce3705cef8d35f3372e40caa277dbd7c7baeb651961538f13d2f11f22402614348f78d9b10501bd1cb5f05ec4f2ec9a74bd0e288de769c32335
   languageName: node
   linkType: hard
 
@@ -2083,23 +2059,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.5.2":
-  version: 4.5.4
-  resolution: "typescript@npm:4.5.4"
+"typescript@npm:^4.5.5":
+  version: 4.5.5
+  resolution: "typescript@npm:4.5.5"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 59f3243f9cd6fe3161e6150ff6bf795fc843b4234a655dbd938a310515e0d61afd1ac942799e7415e4334255e41c2c49b7dd5d9fd38a17acd25a6779ca7e0961
+  checksum: 506f4c919dc8aeaafa92068c997f1d213b9df4d9756d0fae1a1e7ab66b585ab3498050e236113a1c9e57ee08c21ec6814ca7a7f61378c058d79af50a4b1f5a5e
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.5.2#~builtin<compat/typescript>":
-  version: 4.5.4
-  resolution: "typescript@patch:typescript@npm%3A4.5.4#~builtin<compat/typescript>::version=4.5.4&hash=493e53"
+"typescript@patch:typescript@^4.5.5#~builtin<compat/typescript>":
+  version: 4.5.5
+  resolution: "typescript@patch:typescript@npm%3A4.5.5#~builtin<compat/typescript>::version=4.5.5&hash=493e53"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 2e488dde7d2c4a2fa2e79cf2470600f8ce81bc0563c276b72df8ff412d74456ae532ba824650ae936ce207440c79720ddcfaa25e3cb4477572b8534fa4e34d49
+  checksum: c05c318d79c690f101d7ffb34cd6c7d6bbd884d3af9cefe7749ad0cd6be43c7082f098280982ca945dcba23fde34a08fed9602bb26540936baf8c0520727d3ba
   languageName: node
   linkType: hard
 
@@ -2161,6 +2137,13 @@ __metadata:
     safe-buffer: ^5.1.2
     which-typed-array: ^1.1.2
   checksum: 8eac7a6e6b341c0f1b3eb73bbe5dfcae31a7e9699c8fc3266789f3e95f7637946a7700dcf1904dbd3749a58a36760ebf7acf4bb5b717f7468532a8a79f44eff0
+  languageName: node
+  linkType: hard
+
+"v8-compile-cache-lib@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "v8-compile-cache-lib@npm:3.0.0"
+  checksum: 674e312bbca796584b61dc915f33c7e7dc4e06d196e0048cb772c8964493a1ec723f1dd014d9419fd55c24a6eae148f60769da23f622e05cd13268063fa1ed6b
   languageName: node
   linkType: hard
 
