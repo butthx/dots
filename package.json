@@ -17,7 +17,7 @@
     "@tgsnake/wizard-scenes": "^1.2.3",
     "big-integer": "^1.6.51",
     "dotenv": "^16.0.0",
-    "mongoose": "^6.2.3",
+    "mongoose": "^6.4.6",
     "prettier": "^2.5.1",
     "tgsnake": "^2.0.0-beta.17",
     "twig": "^1.15.4"
